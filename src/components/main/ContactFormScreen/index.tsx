@@ -8,6 +8,7 @@ import { SubmitButton } from '../../inputs/SubmitButton'
 import { t } from '../../../i18n'
 import axios from 'axios'
 import { usePathPrefix } from '../../../constants/hooks'
+import { Modal } from '../Modal'
 
 interface IProps {}
 
@@ -98,13 +99,9 @@ const ContactFormScreen: FC<IProps> = ({}) => {
     [validateFields, setState]
   )
 
-  const onSuccessClose = useCallback(
-    event => {
-      event.preventDefault()
-      setState('')
-    },
-    [setState]
-  )
+  const onSuccessClose = useCallback(() => {
+    setState('')
+  }, [setState])
 
   useEffect(() => setErrors({ ...errors, name: false }), [name])
   useEffect(() => setErrors({ ...errors, company: false }), [company])
@@ -168,12 +165,16 @@ const ContactFormScreen: FC<IProps> = ({}) => {
           </a>
         </div>
 
-        <form className={styles.result} onSubmit={onSuccessClose}>
-          <h1>{t('contact.success_title')}</h1>
-          <div>{t('contact.success_subtitle')}</div>
+        {state === STATES.SUCCESS && (
+          <Modal onClose={onSuccessClose}>
+            <div className={styles.result} onClick={onSuccessClose}>
+              <h1>{t('contact.success_title')}</h1>
+              <div>{t('contact.success_subtitle')}</div>
 
-          <SubmitButton>OK</SubmitButton>
-        </form>
+              <SubmitButton>OK</SubmitButton>
+            </div>
+          </Modal>
+        )}
       </div>
     </div>
   )
