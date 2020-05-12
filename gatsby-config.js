@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: `/resto-landing`,
+  // pathPrefix: `/resto-landing`,
   siteMetadata: {
     title: `Title from siteMetadata`,
   },

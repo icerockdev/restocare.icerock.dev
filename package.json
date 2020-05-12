@@ -5,10 +5,10 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build --prefix-paths",
+    "build": "gatsby build --prefix-paths && rm -rf ./docs && mkdirp docs && mv ./public/* ./docs && yarn copyright",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "copyright": "copyright-header --fix --copyrightHolder \"IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.\" -i \"src|dist\"",
+    "copyright": "copyright-header --fix --copyrightHolder \"IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.\" -i \"src|dist|docs\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
