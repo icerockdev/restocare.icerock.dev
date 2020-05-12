@@ -1,0 +1,129 @@
+.wrap {
+  display: flex;
+  height: 70px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #f4f3f8;
+  flex-direction: row;
+  transition: background-color 0.25s;
+
+  &.has_error {
+    background: mix(red, white, 20%);
+
+    .input__error {
+      opacity: 1;
+    }
+  }
+
+  @include tablet {
+    height: 56px;
+  }
+}
+
+.icon {
+  flex: 0 0 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-right: 24px;
+
+  @include tablet {
+    flex: 0 0 56px;
+    padding-right: 16px;
+  }
+
+  &::after {
+    position: absolute;
+    content: ' ';
+    width: 1px;
+    height: 46px;
+    right: 24px;
+    bottom: 12px;
+    background-color: transparentize($color: #000000, $amount: 0.93);
+
+    @include tablet {
+      height: 34px;
+      right: 16px;
+    }
+  }
+}
+
+.input {
+  position: relative;
+  flex: 1;
+
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 32px 24px 16px 0;
+    border: none;
+    background: transparent;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 21px;
+    color: #161616;
+    box-sizing: border-box;
+
+    &::placeholder {
+      font-weight: 400;
+    }
+
+    @include tablet {
+      font-size: 13px;
+      padding: 25px 16px 9px 0;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 25px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 21px;
+    color: rgba(22, 22, 22, 0.6);
+    transform: translate(0, 0) scale(1);
+    transform-origin: 0 50%;
+    transition: transform 0.25s;
+    pointer-events: none;
+    touch-action: none;
+
+    @include tablet {
+      top: 18px;
+      font-size: 13px;
+    }
+  }
+
+  &__error {
+    color: mix(red, $secondary, 70%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    pointer-events: none;
+    touch-action: none;
+    opacity: 0;
+  }
+
+  &.focused {
+    .input__label {
+      transform: scale(0.8) translate(0, -16px);
+      
+      @include tablet {
+        transform: scale(0.8) translate(0, -10px);        
+      }
+    }
+  }
+
+  &.without_label {
+    input {
+      padding: 0 24px 0 0;
+    }
+  }
+}

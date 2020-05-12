@@ -1,0 +1,21 @@
+.wrap {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #6e6e70;
+  padding: 40px;
+  border-top: 1px solid #dedede;
+
+  @include tablet {
+    border-top: none;
+    padding: 24px;
+    font-size: 10px;
+    line-height: 12px;
+  }
+}

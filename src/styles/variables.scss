@@ -1,0 +1,38 @@
+$primary: #292248;
+$secondary: #ffdb72;
+$link: #d761ad;
+$pale: #6c7a89;
+$radius: 8px;
+
+$break-phonel: 480px;
+$break-tablets: 550px;
+$break-tabletp: 768px;
+$break-tabletl: 1024px;
+$break-laptop: 1220px;
+$break-desktop: 1420px;
+
+$container_width: $break-desktop;
+
+@mixin phone {
+  @media (max-width: $break-phonel) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $break-tabletp) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: $break-laptop) {
+    @content;
+  }
+}
+
+@mixin menu_break {
+  @media (max-width: $break-tabletl) {
+    @content;
+  }
+}

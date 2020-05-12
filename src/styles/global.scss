@@ -1,0 +1,85 @@
+html,
+body {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  scrollbar-color: white $primary;
+  scrollbar-width: auto;
+}
+
+body {
+  font-size: 18px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+body * {
+  font-family: Montserrat;
+}
+
+a {
+  color: $secondary;
+}
+
+:global(#___gatsby),
+:global(#gatsby-focus-wrapper) {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: $container_width;
+  margin: auto;
+}
+
+.screen {
+  min-height: 100vh;
+  width: 100%;
+}
+
+h1 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 51px;
+
+  @include tablet {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+h4 {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 32px;
+
+  @include tablet {
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
+
+h5 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  @include tablet {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+  }
+}
