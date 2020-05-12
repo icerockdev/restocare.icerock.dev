@@ -95,6 +95,10 @@ const ContactFormScreen: FC<IProps> = ({}) => {
           ;(window as any).ym(62732482, 'reachGoal', 'form-submitted')
         }
 
+        if ((window as any).grecaptcha) {
+          ;(window as any).grecaptcha.reset()
+        }
+        
         setState(STATES.SUCCESS)
       } catch (e) {
         setState('')
@@ -173,7 +177,9 @@ const ContactFormScreen: FC<IProps> = ({}) => {
           <div className={styles.captcha}>
             <div id="captcha" className="captcha__container"></div>
             {errors.captcha && (
-              <div className={styles.captcha__error}>Пожалуйста, заполните капчу</div>
+              <div className={styles.captcha__error}>
+                Пожалуйста, заполните капчу
+              </div>
             )}
           </div>
 
