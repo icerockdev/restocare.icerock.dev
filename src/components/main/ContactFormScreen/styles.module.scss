@@ -93,3 +93,18 @@
     }
   }
 }
+
+.captcha {
+  min-height: 78px;
+  position: relative;
+
+  &__error {
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    background: white;
+    padding: 0 2px;
+    color: red;
+    font-size: 12px;
+  }
+}

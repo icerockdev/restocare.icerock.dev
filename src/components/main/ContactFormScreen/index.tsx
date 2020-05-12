@@ -9,6 +9,7 @@ import { t } from '../../../i18n'
 import axios from 'axios'
 import { usePathPrefix } from '../../../constants/hooks'
 import { Modal } from '../Modal'
+import { Helmet } from 'react-helmet'
 
 interface IProps {}
 
@@ -45,6 +46,7 @@ const ContactFormScreen: FC<IProps> = ({}) => {
   const [company, setCompany] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
+  const [captcha, setCaptcha] = useState('')
   const [errors, setErrors] = useState<Record<string, boolean>>({})
 
   const validateFields = useCallback(() => {
@@ -52,12 +54,13 @@ const ContactFormScreen: FC<IProps> = ({}) => {
       name: !name || name.length <= 2,
       company: !company || company.length <= 2,
       phone: !phone || phone.length <= 2,
+      captcha: !captcha,
     }
 
     setErrors(errors)
 
     return !Object.values(errors).some(val => val)
-  }, [name, company, phone, email, setErrors])
+  }, [name, company, phone, email, captcha, setErrors])
 
   const onSubmit = useCallback(
     async event => {
@@ -78,6 +81,7 @@ const ContactFormScreen: FC<IProps> = ({}) => {
           name,
           referrer,
           googleId,
+          captcha,
         })
 
         if ((window as any).gtag) {
@@ -107,6 +111,17 @@ const ContactFormScreen: FC<IProps> = ({}) => {
   useEffect(() => setErrors({ ...errors, company: false }), [company])
   useEffect(() => setErrors({ ...errors, phone: false }), [phone])
   useEffect(() => setErrors({ ...errors, email: false }), [email])
+  useEffect(() => setErrors({ ...errors, captcha: false }), [captcha])
+
+  useEffect(() => {
+    ;(window as any).onCaptchaLoad = function () {
+      if (!(window as any).grecaptcha) return
+      ;(window as any).grecaptcha.render('captcha', {
+        sitekey: process.env.GATSBY_CAPTCHA_SITEID,
+        callback: setCaptcha,
+      })
+    }
+  }, [setCaptcha])
 
   return (
     <div className={styles.wrap} id="contact">
@@ -154,6 +169,21 @@ const ContactFormScreen: FC<IProps> = ({}) => {
             icon={`${prefix}/images/contact_email.svg`}
             hasError={errors.email}
           />
+
+          <div className={styles.captcha}>
+            <div id="captcha" className="captcha__container"></div>
+            {errors.captcha && (
+              <div className={styles.captcha__error}>Пожалуйста, заполните капчу</div>
+            )}
+          </div>
+
+          <Helmet>
+            <script
+              src="https://www.google.com/recaptcha/api.js?onload=onCaptchaLoad&amp;render=explicit&amp;hl=ru"
+              async
+              defer
+            />
+          </Helmet>
 
           <SubmitButton>{t('contact.send')}</SubmitButton>
         </form>
