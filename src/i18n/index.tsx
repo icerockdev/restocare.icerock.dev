@@ -4,7 +4,7 @@ import React, {
   FC,
   ReactNode,
 } from 'react'
-import { IntlProvider, FormattedMessage } from 'react-intl'
+import { IntlProvider, FormattedMessage, useIntl } from 'react-intl'
 import flatten from 'flat'
 import locales from '../constants/locales'
 
@@ -32,6 +32,9 @@ const Trans: FC<IProps> = ({ locale, children }) => {
   )
 }
 
-const t: FC<string> = id => <FormattedMessage id={id} />
+const t: FC<string> = (id: string) => {
+  const intl = useIntl();
+  return <span dangerouslySetInnerHTML={{ __html: intl.formatMessage({ id }) }} />
+}
 
 export { Trans, t }
