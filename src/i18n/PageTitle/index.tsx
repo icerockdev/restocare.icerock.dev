@@ -21,12 +21,14 @@ const PageTitle: FC<IProps> = ({ children }) => {
     <Helmet>
       <meta
         property="og:title"
-        content="IceRock - Собственное ресторанное мобильное приложение для доставки и самовывоза"
+        content="IceRock - Собственное мобильное приложение с доставкой и самовывозом для ресторана"
       />
+      
       <meta
         property="og:image"
         content={`${prefix}/android-chrome-512x512.png`}
       />
+
       <title>IceRock{title ? ` - ${title}` : ''}</title>
     </Helmet>
   )
