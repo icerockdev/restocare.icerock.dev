@@ -140,6 +140,8 @@
 
 .links {
   margin-top: 64px;
+  display: flex;
+  flex-wrap: wrap;
 
   @include tablet {
     margin-top: 16px;
@@ -154,9 +156,10 @@
       content: ' ';
       position: absolute;
       left: 0;
-      top: 0;
-      height: 100%;
+      top: 50%;
+      height: 1em;
       width: 1px;
+      transform: translate(0, -50%);
       background: white;
     }
 

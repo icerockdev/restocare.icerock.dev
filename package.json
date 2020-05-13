@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build --prefix-paths && rm -rf ./docs && mkdirp docs && mv ./public/* ./docs",
-    "develop": "gatsby develop",
+    "develop": "gatsby develop -H 0.0.0.0",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "copyright": "copyright-header --fix --copyrightHolder \"IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.\" -i \"src|dist|docs\"",
     "start": "npm run develop",
