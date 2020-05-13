@@ -41,6 +41,8 @@ const getGa = () => {
 const ContactFormScreen: FC<IProps> = ({}) => {
   const prefix = usePathPrefix()
 
+  const [captchaCallbackAdded, setCaptchaCallbackAdded] = useState(false)
+
   const [state, setState] = useState('')
   const [name, setName] = useState('')
   const [company, setCompany] = useState('')
@@ -98,7 +100,7 @@ const ContactFormScreen: FC<IProps> = ({}) => {
         if ((window as any).grecaptcha) {
           ;(window as any).grecaptcha.reset()
         }
-        
+
         setState(STATES.SUCCESS)
       } catch (e) {
         setState('')
@@ -125,7 +127,9 @@ const ContactFormScreen: FC<IProps> = ({}) => {
         callback: setCaptcha,
       })
     }
-  }, [setCaptcha])
+
+    setCaptchaCallbackAdded(true)
+  }, [setCaptcha, setCaptchaCallbackAdded])
 
   return (
     <div className={styles.wrap} id="contact">
@@ -184,11 +188,13 @@ const ContactFormScreen: FC<IProps> = ({}) => {
           </div>
 
           <Helmet>
-            <script
-              src="https://www.google.com/recaptcha/api.js?onload=onCaptchaLoad&amp;render=explicit&amp;hl=ru"
-              async
-              defer
-            />
+            {captchaCallbackAdded && (
+              <script
+                src="https://www.google.com/recaptcha/api.js?onload=onCaptchaLoad&amp;render=explicit&amp;hl=ru"
+                async
+                defer
+              />
+            )}
           </Helmet>
 
           <SubmitButton>{t('contact.send')}</SubmitButton>
