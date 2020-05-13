@@ -3,6 +3,7 @@
 import React, { FC, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
 import { useIntl } from 'react-intl'
+import { usePathPrefix } from '../../constants/hooks'
 
 interface IProps {
   children: string
@@ -10,7 +11,7 @@ interface IProps {
 
 const PageTitle: FC<IProps> = ({ children }) => {
   const { messages } = useIntl()
-
+  const prefix = usePathPrefix()
   const title = useMemo(
     () => (children && messages[children]) || children || '',
     [children, messages]
@@ -18,6 +19,14 @@ const PageTitle: FC<IProps> = ({ children }) => {
 
   return (
     <Helmet>
+      <meta
+        property="og:title"
+        content="IceRock - Собственное ресторанное мобильное приложение для доставки и самовывоза"
+      />
+      <meta
+        property="og:image"
+        content={`${prefix}/android-chrome-512x512.png`}
+      />
       <title>IceRock{title ? ` - ${title}` : ''}</title>
     </Helmet>
   )

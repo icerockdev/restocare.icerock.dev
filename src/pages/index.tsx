@@ -9,13 +9,15 @@ import { CardsScreen } from '../components/main/CardsScreen'
 import { LaunchScreen } from '../components/main/LaunchScreen'
 import { ContactFormScreen } from '../components/main/ContactFormScreen'
 import { Footer } from '../components/main/Footer'
+import Helmet from 'react-helmet'
+import { usePathPrefix } from '../constants/hooks'
 
 type IProps = PageProps<{}, { locale: string }>
 
 const AboutPage: FC<IProps> = ({
   location,
   pageContext: { locale = DEFAULT_LOCALE },
-}) => {
+}) => {  
   return (
     <MainLayout locale={locale} location={location} title="title.title">
       <TitleScreen />
