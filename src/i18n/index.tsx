@@ -1,10 +1,13 @@
 /* Copyright (c) 2020 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license. */
 
-import React, {
-  FC,
-  ReactNode,
-} from 'react'
-import { IntlProvider, FormattedMessage, useIntl } from 'react-intl'
+import React, { FC, ReactNode } from 'react'
+import {
+  IntlProvider,
+  FormattedMessage,
+  useIntl,
+  IntlShape,
+  injectIntl,
+} from 'react-intl'
 import flatten from 'flat'
 import locales from '../constants/locales'
 
@@ -32,9 +35,13 @@ const Trans: FC<IProps> = ({ locale, children }) => {
   )
 }
 
+const trans: FC<{ id: string; intl: IntlShape }> = ({ id, intl }) => {
+  const placeholder = intl.formatMessage({ id })
+  return <span dangerouslySetInnerHTML={{ __html: placeholder }} />
+}
+
 const t: FC<string> = (id: string) => {
-  const intl = useIntl();
-  return <span dangerouslySetInnerHTML={{ __html: intl.formatMessage({ id }) }} />
+  return injectIntl(trans)({ id })
 }
 
 export { Trans, t }
