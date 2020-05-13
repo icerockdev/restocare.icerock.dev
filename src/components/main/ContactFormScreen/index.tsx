@@ -102,6 +102,12 @@ const ContactFormScreen: FC<IProps> = ({}) => {
         }
 
         setState(STATES.SUCCESS)
+
+        setName('')
+        setEmail('')
+        setPhone('')
+        setCaptcha('')
+        setCompany('')
       } catch (e) {
         setState('')
       }
