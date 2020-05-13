@@ -17,10 +17,11 @@
   box-sizing: border-box;
 
   @include desktop {
-    padding: 0 16px 40px 16px;
+    padding: 0 40px 40px 40px;
   }
-
+  
   @include tablet {
+    padding: 0 16px 40px 16px;
     flex: 0 0 100%;
   }
 }
@@ -55,7 +56,8 @@
   }
 
   &_desktop {
-    flex: 0 1 30vw;
+    // flex: 0 1 30vw;
+    flex: 0 1 400px;
     display: flex;
 
     @include tablet {

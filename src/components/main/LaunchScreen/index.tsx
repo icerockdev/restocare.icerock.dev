@@ -9,12 +9,15 @@ import { usePathPrefix } from '../../../constants/hooks'
 interface IProps {}
 
 const LaunchScreen: FC<IProps> = ({}) => {
-  const prefix = usePathPrefix();
+  const prefix = usePathPrefix()
 
   return (
     <div className={styles.wrap} id="launch">
       <div className={classNames(styles.image, styles.image_desktop)}>
-        <img src={`${prefix}/images/launch_desktop.svg`} alt="launch" />
+        <img
+          src={`${prefix}/images/launch_desktop.svg`}
+          alt="launch"
+        />
       </div>
 
       <div className={styles.content}>
