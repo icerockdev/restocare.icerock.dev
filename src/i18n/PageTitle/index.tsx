@@ -21,9 +21,9 @@ const PageTitle: FC<IProps> = ({ children }) => {
     <Helmet>
       <meta
         property="og:title"
-        content="IceRock - Собственное мобильное приложение с доставкой и самовывозом для ресторана"
+        content={`IceRock${title ? ` - ${title}` : ''}`}
       />
-      
+
       <meta
         property="og:image"
         content={`${prefix}/android-chrome-512x512.png`}
