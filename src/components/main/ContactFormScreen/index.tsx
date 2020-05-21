@@ -172,7 +172,7 @@ const ContactFormScreen: FC<IProps> = ({}) => {
             icon={`${prefix}/images/contact_phone.svg`}
             placeholder="+7 (000) 000 00 00"
             hasError={errors.phone}
-            mask="+9 (999) 999 99 99"
+            mask="[+]9 (999) 999 99 99[99]"
           />
 
           <TextInput

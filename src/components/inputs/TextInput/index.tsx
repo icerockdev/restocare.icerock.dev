@@ -1,10 +1,11 @@
 /* Copyright (c) 2020 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license. */
 
-import React, { FC, useCallback, useState } from 'react'
+import React, { FC, useCallback, useState, useEffect, useRef } from 'react'
 import styles from './styles.module.scss'
 import { t } from '../../../i18n'
 import classNames from 'classnames'
-import InputMask from 'react-input-mask'
+import Inputmask from 'inputmask'
+// import InputMask from 'react-input-mask'
 
 interface IProps {
   value: string
@@ -13,7 +14,7 @@ interface IProps {
   name: string
   icon: string
   hasError?: boolean
-  mask?: string
+  mask?: string | RegExp
   handler: (val: string) => void
 }
 
@@ -27,11 +28,21 @@ const TextInput: FC<IProps> = ({
   handler,
   mask,
 }) => {
+  const input = useRef<HTMLInputElement>(null)
   const [focused, setFocused] = useState(false)
   const onChange = useCallback(event => handler(event.target.value), [handler])
 
   const onFocus = useCallback(() => setFocused(true), [setFocused])
   const onBlur = useCallback(() => setFocused(false), [setFocused])
+
+  useEffect(() => {
+    if (!input.current || !mask) return
+
+    new Inputmask(mask, {
+      showMaskOnHover: false,
+      greedy: false,
+    }).mask(input.current)
+  }, [mask, input.current])
 
   return (
     <div className={classNames(styles.wrap, { [styles.has_error]: hasError })}>
@@ -55,28 +66,16 @@ const TextInput: FC<IProps> = ({
           {t('contact.fill_this_field')}
         </div>
 
-        {mask ? (
-          <InputMask
-            type="text"
-            name={name}
-            value={value}
-            placeholder={placeholder}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            mask={mask}
-          />
-        ) : (
-          <input
-            type="text"
-            name={name}
-            value={value}
-            placeholder={placeholder}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-          />
-        )}
+        <input
+          type="text"
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          onChange={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          ref={input}
+        />
       </div>
     </div>
   )
