@@ -208,7 +208,8 @@ const ContactFormScreen: FC<IProps> = ({}) => {
 
         <div className={styles.terms}>
           {t('contact.terms')}
-          <a href="CHANGE_ME" target="_blank" rel="nofollow">
+          
+          <a href="/terms.pdf" target="_blank" rel="nofollow">
             {t('contact.personal_data')}
           </a>
         </div>
