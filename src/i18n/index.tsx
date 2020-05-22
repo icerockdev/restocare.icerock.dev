@@ -3,8 +3,6 @@
 import React, { FC, ReactNode } from 'react'
 import {
   IntlProvider,
-  FormattedMessage,
-  useIntl,
   IntlShape,
   injectIntl,
 } from 'react-intl'

@@ -3,22 +3,84 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background: $primary;
   z-index: 20;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.content {
   color: white;
+  background: $primary;
   display: grid;
   align-items: center;
-  justify-content: center;
-  padding: 40px;
-  box-sizing: border-box;
-  grid-template-columns: repeat(2, auto);
-  grid-column-gap: 32px;
-
+  justify-content: stretch;
   font-size: 14px;
   line-height: 22px;
   box-shadow: inset white 0 0 0 1px;
+  padding: 32px;
+  box-sizing: border-box;
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 32px;
+  width: 100%;
 
   @include tablet {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      margin-top: 16px;
+      width: 100%;
+    }
+  }
+}
+
+.text {
+  flex: 1;
+
+  @include tablet {
+    text-align: center;
     display: none;
+  }
+}
+
+.text_short {
+  text-align: center;
+  font-size: 14px;
+  line-height: 22px;
+  display: none;
+
+  a {
+    color: $secondary;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  @include tablet {
+    display: block;
+  }
+}
+
+.button {
+}
+
+.modal {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+
+  a {
+    color: $primary;
+    font-weight: bold;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 16px;
   }
 }
