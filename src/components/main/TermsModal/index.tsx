@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback } from 'react'
+import React, { FC, useState, useCallback, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { t } from '../../../i18n'
 import { useIntl } from 'react-intl'
@@ -17,7 +17,7 @@ const haveSeenTerms = () => {
 const TermsModal: FC<IProps> = ({}) => {
   const { messages } = useIntl()
 
-  const [shown, setShown] = useState(haveSeenTerms())
+  const [shown, setShown] = useState(true)
   const [show_modal, setShowModal] = useState(false)
 
   const setSeenTerms = useCallback(() => {
@@ -28,6 +28,10 @@ const TermsModal: FC<IProps> = ({}) => {
   const showModal = useCallback(() => setShowModal(true), [setShowModal])
   const hideModal = useCallback(() => setShowModal(false), [setShowModal])
 
+  useEffect(() => {
+    setTimeout(() => setShown(haveSeenTerms()), 500)
+  }, [])
+
   if (shown) return <div className={styles.nope} />
 
   return (
@@ -36,11 +40,9 @@ const TermsModal: FC<IProps> = ({}) => {
         <Modal onClose={hideModal}>
           <div className={styles.modal}>
             {t('terms.text')}{' '}
-
             <a href={messages['terms.link_url'] as string} target="_blank">
               {t('terms.link_text_short')}
             </a>
-
             <div className={styles.button}>
               <button onClick={hideModal}>{t('terms.button')}</button>
             </div>
