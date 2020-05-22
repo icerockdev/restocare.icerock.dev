@@ -28,7 +28,7 @@ const TermsModal: FC<IProps> = ({}) => {
   const showModal = useCallback(() => setShowModal(true), [setShowModal])
   const hideModal = useCallback(() => setShowModal(false), [setShowModal])
 
-  if (shown) return null
+  if (shown) return <div className={styles.nope} />
 
   return (
     <div className={styles.wrap}>
