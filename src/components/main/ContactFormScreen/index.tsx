@@ -10,32 +10,13 @@ import axios from 'axios'
 import { usePathPrefix } from '../../../constants/hooks'
 import { Modal } from '../Modal'
 import { Helmet } from 'react-helmet'
+import { getGa, getUtmData } from '../../../utils/ga'
 
 interface IProps {}
 
 const STATES = {
   SUCCESS: 'success',
   LOADING: 'loading',
-}
-
-function getCookie(name: string) {
-  var matches = document.cookie.match(
-    new RegExp(
-      '(?:^|; )' +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
-        '=([^;]*)'
-    )
-  )
-  return matches ? decodeURIComponent(matches[1]) : undefined
-}
-
-const getGa = () => {
-  if (window.ga && window.ga.getAll && window.ga.getAll().length) {
-    return window.ga.getAll()[0].get('clientId')
-  }
-
-  const cookie = getCookie('_ga')
-  return cookie ? cookie.replace(/^[^\.]+\.[^\.]+\./, '') : ''
 }
 
 const ContactFormScreen: FC<IProps> = ({}) => {
@@ -75,6 +56,7 @@ const ContactFormScreen: FC<IProps> = ({}) => {
 
         const referrer = document?.referrer || ''
         const googleId = getGa()
+        const utm = getUtmData()
 
         const result = await axios.post(process.env.GATSBY_API_URL || '', {
           email,
@@ -84,6 +66,7 @@ const ContactFormScreen: FC<IProps> = ({}) => {
           referrer,
           googleId,
           captcha,
+          ...utm,
         })
 
         if ((window as any).gtag) {
@@ -208,7 +191,7 @@ const ContactFormScreen: FC<IProps> = ({}) => {
 
         <div className={styles.terms}>
           {t('contact.terms')}
-          
+
           <a href="/terms.pdf" target="_blank" rel="nofollow">
             {t('contact.personal_data')}
           </a>
